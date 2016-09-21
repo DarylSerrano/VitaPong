@@ -1,19 +1,16 @@
 #ifndef	PADDLE_H
 #define	PADDLE_H
 
-typedef enum Paddle_Pos
-{
-	UP, DOWN
-} Paddle_Pos;
+#include "utils.h"
+#include "ball.h"
 
 typedef struct Paddle
 {
 	int height;
-	int weight;
+	int width;
 	int x;
 	int y;
-	int paddle_speed;
-	Paddle_Pos paddle_pos;
+	Position pos;
 	int score;
 } Paddle;
 
@@ -25,6 +22,11 @@ void paddle_move_right(Paddle * paddle, Ball * ball);
 int paddle_collision(Paddle * paddle, Ball * ball);
 
 /*	Shots the ball ont the corresponding direction if the game hasn't started yet	*/
-void shoot_ball(Ball * ball);
+void paddle_shoot_ball(Paddle * paddle, Ball * ball);
+
+/*	Positions the ball on the position of the corresponding paddle player	*/
+void ball_reposition(Ball * ball, Player player);
+
+void draw_paddle(Paddle * paddle);
 
 #endif
