@@ -13,7 +13,7 @@ void ball_move(Ball * ball)
 /*	Retruns a Position enum if the ball is on the range of the paddle	*/
 Position ball_collision(Ball * ball)
 {
-	Position pos = Position.MIDDLE;
+	Position pos = MIDDLE;
 	
 	if(ball->x + BALL_RADIUS >= SCREEN_W)
 	{
@@ -26,11 +26,11 @@ Position ball_collision(Ball * ball)
 	
 	if(ball->y <= PADDLE_H + BALL_RADIUS)
 	{
-		pos = Position.UP;
+		pos = UP;
 	}
 	else if(ball->y >= SCREEN_H - (PADDLE_H + BALL_RADIUS))
 	{
-		pos = Position.DOWN;
+		pos = DOWN;
 	}
 	
 	return pos;

@@ -1,5 +1,5 @@
-#ifndef	UTILS_H
-#define UTILS_H
+#ifndef	__UTILS_H__
+#define __UTILS_H__
 
 #define	SCREEN_W	966
 #define SCREEN_H	544	
@@ -37,9 +37,6 @@
 #define	CYAN    RGBA8(  0, 255, 255, 255)
 #define	ORANGE  RGBA8(255, 165,	  0, 255)
 #define	YELLOW	RGBA8(255, 255, 0, 255)
-
-/*	Definition of NULL	*/
-#define	NULL	( (void *) 0)
 
 typedef enum Position
 {

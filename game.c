@@ -1,16 +1,17 @@
 #include <psp2/ctrl.h>
 #include <vita2d.h>
-#include <time.h>
+#include <sys/time.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "game.h"
+#include "paddle.h"
 
 void draw_ingame(Paddle * pj1, Paddle * pj2, Ball * ball, vita2d_pgf * pgf)
 {
 	// Draw Scores
-	vita2d_pgf_draw_textf(pgf, SCORE_POSITION_PJ1, 0, WHITE, 1.0f, "%d", pj1->score);
-	vita2d_pgf_draw_textf(pgf, SCORE_POSITION_PJ2, 0, WHITE, 1.0f, "%d", pj1->score);
+	vita2d_pgf_draw_textf(pgf, SCORE_POSITION_PJ1, MIDDLE_SCREEN, WHITE, 1.0f, "%d", pj1->score);
+	vita2d_pgf_draw_textf(pgf, SCORE_POSITION_PJ2, MIDDLE_SCREEN, WHITE, 1.0f, "%d", pj2->score);
 	
 	// Draw Ball
 	draw_ball(ball);
@@ -33,13 +34,21 @@ int collision_check(Paddle * pj1, Paddle * pj2, Ball * ball)
 	
 	switch(pos)
 	{
-		case Position.UP:
-			passed = paddle_collision(pj2);
+		case UP:
+			passed = paddle_collision(pj2, ball);
+			if(passed)
+			{
+				pj1->score += 1;
+			}
 			break;
-		case Position.DOWN:
-			passed = paddle_collision(pj1);
+		case DOWN:
+			passed = paddle_collision(pj1, ball);
+			if(passed)
+			{
+				pj2->score += 1;
+			}
 			break;
-		default:
+		default: //Position.MIDDLE
 			break;
 	}
 	
@@ -51,18 +60,22 @@ void prepare_in_game(Paddle * pj1, Paddle * pj2, Ball * ball)
 	srand(time(NULL));
 	
 	Position pos = (Position) (rand() % 2);
-	
-	if(pos.UP)
+	ball->is_moving = 0;
+
+	pj1->x = PLAYER_BOTTOM_POS_X;
+	pj1->y = PLAYER_BOTTOM_POS_Y;
+	pj2->x = PLAYER_TOP_POS_X;
+	pj2->y = PLAYER_TOP_POS_Y;
+
+	if(pos == UP)
 	{
 		pj2->has_ball = 1;
-		ball->is_moving = 0;
 		ball_reposition(ball, pj2);
 	}
-	else if(pos.DOWN)
+	else if(pos ==DOWN)
 	{
 		pj1->has_ball = 1;
-		ball->is_moving = 0;
-		ball_reposition(ball, pj2);
+		ball_reposition(ball, pj1);
 	}
 	else
 	{
@@ -81,7 +94,7 @@ void input_paddles(Paddle * pj1, Paddle * pj2, Ball * ball, SceCtrlData * pad)
 		}
 		else if(pad->buttons & SCE_CTRL_SQUARE)
 		{
-			paddle_mave_left(pj1, ball);
+			paddle_move_left(pj1, ball);
 		}
 		else if(pad->buttons & SCE_CTRL_CROSS)
 		{
@@ -110,11 +123,11 @@ void input_paddles(Paddle * pj1, Paddle * pj2, Ball * ball, SceCtrlData * pad)
 		// pj1 inputs
 		if(pad->buttons & SCE_CTRL_CIRCLE)
 		{
-			paddle_move_right(pj1);
+			paddle_move_right(pj1, NULL);
 		}
 		else if(pad->buttons & SCE_CTRL_SQUARE)
 		{
-			paddle_mave_left(pj1);
+			paddle_move_left(pj1, NULL);
 		}
 	}
 	
@@ -123,11 +136,11 @@ void input_paddles(Paddle * pj1, Paddle * pj2, Ball * ball, SceCtrlData * pad)
 		// pj2 inputs
 		if(pad->buttons & SCE_CTRL_RIGHT)
 		{
-			paddle_move_right(pj2);
+			paddle_move_right(pj2, NULL);
 		}
 		else if(pad->buttons & SCE_CTRL_LEFT)
 		{
-			paddle_move_left(pj2);
+			paddle_move_left(pj2, NULL);
 		}
 	}
 	
@@ -137,18 +150,23 @@ void input_process(Game * game, SceCtrlData * pad)
 {
 	sceCtrlPeekBufferPositive(0, pad, 1);
 	
-	if(game->gameState == State.IN_GAME)
+	if(game->game_state == IN_GAME)
 	{
-		input_paddles(game->pj1, game->pj2, pad);
+		input_paddles(game->pj1, game->pj2, game->ball,  pad);
 	}
-	else // State.MAIN_MENU
+	else if(game->game_state == MAIN_MENU) // State.MAIN_MENU
 	{
 		if(pad->buttons & SCE_CTRL_START)
 		{
-			game->gameState = State.IN_GAME;
+			game->game_state = IN_GAME;
+			(game->pj1)->score = 0;
+			(game->pj2)->score = 0;
 			prepare_in_game(game->pj1, game->pj2, game->ball);
 		}
 		
 	}
 }
+
+
+
 

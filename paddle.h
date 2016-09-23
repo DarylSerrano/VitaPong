@@ -1,13 +1,11 @@
-#ifndef	PADDLE_H
-#define	PADDLE_H
+#ifndef	__PADDLE_H__
+#define	__PADDLE_H__
 
 #include "utils.h"
 #include "ball.h"
 
 typedef struct Paddle
 {
-	int height;
-	int width;
 	int x;
 	int y;
 	Position pos;

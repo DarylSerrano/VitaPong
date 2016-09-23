@@ -1,4 +1,4 @@
-#include <stdio.h>
+##include <stdio.h>
 #include <vita2d.h>
 
 #include "paddle.h"
@@ -6,27 +6,27 @@
 /*	If ball != NULL the ball moves with the paddle	*/
 void paddle_move_left(Paddle * paddle, Ball * ball)
 {
-	if(paddle->x + PADDLE_SPEED <= SCREEN_W - paddle->width)
+	if(paddle->x < SCREEN_W - PADDLE_H)
 	{
 		paddle->x += PADDLE_SPEED;
 	}
 	
 	if(ball != NULL)
 	{
-		ball->x = paddle->x + (paddle->width / 2);
+		ball->x = paddle->x + (PADDLE_H / 2);
 	}
 }
 
 void paddle_move_right(Paddle * paddle, Ball * ball)
 {
-	if(paddle->x - PADDLE_SPEED >= SCREEN_W)
+	if(paddle->x > 0)
 	{
 		paddle->x -= PADDLE_SPEED;
 	}
 	
 	if(ball != NULL)
 	{
-		ball->x = paddle->x + (paddle->width / 2);
+		ball->x = paddle->x + (PADDLE_H / 2);
 	}
 }
 
@@ -35,23 +35,23 @@ int paddle_collision(Paddle * paddle, Ball * ball)
 {
 	int passed = 0;
 	
-	if(Paddle->pos == Position.UP)
+	if(paddle->pos == UP)
 	{
 		if(ball->y > 0)
 		{
-			if(ball->x >= paddle->x && ball->x < paddle->x + (paddle->width/3))
+			if(ball->x >= paddle->x && ball->x < paddle->x + (PADDLE_H/3))
 			{
 				ball->speed_x = -ball->speed_y;
 				ball->speed_y = -ball->speed_y;
 			}
-			else if(ball->x > paddle->x + 2*(paddle->width/3) && ball->x <= paddle->x + 3*(paddle->width/3))
+			else if(ball->x > paddle->x + 2*(PADDLE_H/3) && ball->x <= paddle->x + 3*(PADDLE_H/3))
 			{
 				ball->speed_x = ball->speed_y;
 				ball->speed_y = -ball->speed_y;
 			}
-			else if(ball->x >= paddle->x + (paddle->width/3) && ball->x <= paddle->x + 2*(paddle->width/3))
+			else if(ball->x >= paddle->x + (PADDLE_H/3) && ball->x <= paddle->x + 2*(PADDLE_H/3))
 			{
-				ball->speed_y = -ball_speed_y;
+				ball->speed_y = -ball->speed_y;
 			}
 		}
 		else
@@ -60,23 +60,23 @@ int paddle_collision(Paddle * paddle, Ball * ball)
 			ball->is_moving = 0;
 		}
 	}
-	else if(Paddle->pos == Position.DOWN)
+	else if(paddle->pos == DOWN)
 	{
 		if(ball->y < SCREEN_H)
 		{
-			if(ball->x >= paddle->x && ball->x < paddle->x + (paddle->width/3))
+			if(ball->x >= paddle->x && ball->x < paddle->x + (PADDLE_H/3))
 			{
 				ball->speed_x = ball->speed_y;
 				ball->speed_y = -ball->speed_y;
 			}
-			else if(ball->x > paddle->x + 2*(paddle->width/3) && ball->x <= paddle->x + 3*(paddle->width/3))
+			else if(ball->x > paddle->x + 2*(PADDLE_H/3) && ball->x <= paddle->x + 3*(PADDLE_H/3))
 			{
 				ball->speed_x = -ball->speed_y;
 				ball->speed_y = -ball->speed_y;
 			}
-			else if(ball->x >= paddle->x + (paddle->width/3) && ball->x <= paddle->x + 2*(paddle->width/3))
+			else if(ball->x >= paddle->x + (PADDLE_H/3) && ball->x <= paddle->x + 2*(PADDLE_H/3))
 			{
-				ball->speed_y = -ball_speed_y;
+				ball->speed_y = -ball->speed_y;
 			}
 		}
 		else
@@ -97,13 +97,13 @@ void paddle_shoot_ball(Paddle * paddle, Ball * ball)
 	
 	ball->speed_x = BALL_SPEED;
 	
-	if(paddle->pos == Position.UP)
+	if(paddle->pos == UP)
 	{
 		ball->speed_y = BALL_SPEED;
 	}
-	else if(paddle->pos == Position.DOWN)
+	else if(paddle->pos == DOWN)
 	{
-		ball->speed_y = = -BALL_SPEED;
+		ball->speed_y = -BALL_SPEED;
 	}
 }
 
@@ -112,11 +112,11 @@ void ball_reposition(Ball * ball, Paddle * paddle)
 {
 	ball->x = paddle->x +(PADDLE_W / 2);
 	
-	if(paddle->pos == Position.UP)
+	if(paddle->pos == UP)
 	{
 		ball->y = paddle->y + (PADDLE_H + BALL_RADIUS + 1);
 	}
-	else if(paddle->pos == Position.DOWN)
+	else if(paddle->pos == DOWN)
 	{
 		ball->y = paddle->y - (PADDLE_H + BALL_RADIUS + 1);
 	}

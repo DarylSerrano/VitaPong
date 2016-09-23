@@ -1,5 +1,5 @@
-#ifndef	BALL_H
-#define	BALL_H
+#ifndef	__BALL_H__
+#define	__BALL_H__
 
 #include "utils.h"
 
