@@ -27,16 +27,19 @@
 #define	SCORE_POSITION_PJ2	0
 
 /*	Color utils	*/
-#define TRANS   RGBA8(  0,   0,   0, 0)
-#define BLACK   RGBA8(  0,   0,   0, 255)
-#define WHITE   RGBA8(255, 255, 255, 255)
-#define GREEN   RGBA8(  0, 255,   0, 255)
-#define RED     RGBA8(255,   0,   0, 255)
-#define BLUE    RGBA8(  0,   0, 255, 255)
-#define GRAY    RGBA8( 70,  70,  70, 255)
-#define CYAN    RGBA8(  0, 255, 255, 255)
-#define ORANGE  RGBA8(255, 165,	  0, 255)
-#define YELLOW RGBA8(255, 255, 0, 255)
+#define	TRANS   RGBA8(  0,   0,   0, 0)
+#define	BLACK   RGBA8(  0,   0,   0, 255)
+#define	WHITE   RGBA8(255, 255, 255, 255)
+#define	GREEN   RGBA8(  0, 255,   0, 255)
+#define	RED     RGBA8(255,   0,   0, 255)
+#define	BLUE    RGBA8(  0,   0, 255, 255)
+#define	GRAY    RGBA8( 70,  70,  70, 255)
+#define	CYAN    RGBA8(  0, 255, 255, 255)
+#define	ORANGE  RGBA8(255, 165,	  0, 255)
+#define	YELLOW	RGBA8(255, 255, 0, 255)
+
+/*	Definition of NULL	*/
+#define	NULL	( (void *) 0)
 
 typedef enum Position
 {

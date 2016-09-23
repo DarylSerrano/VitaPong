@@ -16,8 +16,9 @@ typedef enum State
 typedef struct Game
 {
 	State gameState;
-	int playing;
-	int started;
+	Paddle * pj1;
+	Paddle * pj2;
+	Ball * ball;
 } Game;
 
 void draw_ingame(Paddle * pj1, Paddle * pj2, Ball * ball);
@@ -25,7 +26,9 @@ void draw_main_menu();
 
 int collision_check(Paddle * pj1, Paddle * pj2, Ball * ball);
 
-void input_paddles(Paddle * pj1, Paddle * pj2, SceCtrlData * pad);
+void prepare_in_game(Paddle * pj1, Paddle * pj2, Ball * ball);
+
+void input_paddles(Paddle * pj1, Paddle * pj2, Ball * ball, SceCtrlData * pad);
 void input_process(Game * game);
 
 #endif

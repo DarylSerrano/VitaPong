@@ -60,7 +60,7 @@ int paddle_collision(Paddle * paddle, Ball * ball)
 			ball->is_moving = 0;
 		}
 	}
-	else //(Paddle->pos == Position.DOWN)
+	else if(Paddle->pos == Position.DOWN)
 	{
 		if(ball->y < SCREEN_H)
 		{
@@ -93,6 +93,7 @@ int paddle_collision(Paddle * paddle, Ball * ball)
 void paddle_shoot_ball(Paddle * paddle, Ball * ball)
 {
 	ball->is_moving = 1;
+	paddle->has_ball = 0;
 	
 	ball->speed_x = BALL_SPEED;
 	
@@ -100,7 +101,7 @@ void paddle_shoot_ball(Paddle * paddle, Ball * ball)
 	{
 		ball->speed_y = BALL_SPEED;
 	}
-	else
+	else if(paddle->pos == Position.DOWN)
 	{
 		ball->speed_y = = -BALL_SPEED;
 	}
@@ -111,11 +112,11 @@ void ball_reposition(Ball * ball, Paddle * paddle)
 {
 	ball->x = paddle->x +(PADDLE_W / 2);
 	
-	if(paddle->pos == Position.TOP)
+	if(paddle->pos == Position.UP)
 	{
 		ball->y = paddle->y + (PADDLE_H + BALL_RADIUS + 1);
 	}
-	else
+	else if(paddle->pos == Position.DOWN)
 	{
 		ball->y = paddle->y - (PADDLE_H + BALL_RADIUS + 1);
 	}

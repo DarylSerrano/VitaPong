@@ -1,6 +1,8 @@
 #ifndef	BALL_H
 #define	BALL_H
 
+#include "utils.h"
+
 typedef struct Ball
 {
 	int x;
