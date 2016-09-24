@@ -1,4 +1,4 @@
-##include <stdio.h>
+#include <stdio.h>
 #include <vita2d.h>
 
 #include "paddle.h"
