@@ -39,14 +39,6 @@ int main()
 
 	while(1)
 	{
-		/*
-		vita2d_start_drawing();
-		vita2d_clear_screen();
-		vita2d_pgf_draw_textf(pgf, MIDDLE_SCREEN, SCREEN_H/2, WHITE, 1.0f, "Test: posicion de pj1 %d", game->pj1->x);
-		vita2d_pgf_draw_textf(pgf, MIDDLE_SCREEN, SCREEN_H/2+10, WHITE, 1.0f, "Test: posicion de pj1 %d", game->ball->x);
-		vita2d_end_drawing();
-		vita2d_swap_buffers();
-		*/
 		update(game, &pad);
 		draw(pgf, game);
 	}

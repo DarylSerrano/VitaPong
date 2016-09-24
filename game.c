@@ -23,8 +23,8 @@ void draw_ingame(Paddle * pj1, Paddle * pj2, Ball * ball, vita2d_pgf * pgf)
 
 void draw_main_menu(vita2d_pgf * pgf)
 {
-	vita2d_pgf_draw_text(pgf, MIDDLE_SCREEN, SCREEN_H/2, WHITE, 1.0f, "Press start to play");
-	vita2d_pgf_draw_text(pgf, MIDDLE_SCREEN, SCREEN_H/2 + 30, WHITE, 3.0f, "VITA PONG");
+	vita2d_pgf_draw_text(pgf, MIDDLE_SCREEN-100, SCREEN_H/2 + 100, WHITE, 1.0f, "Press start to play");
+	vita2d_pgf_draw_text(pgf, MIDDLE_SCREEN-280, SCREEN_H/2, WHITE, 3.0f, "VITA PONG");
 }
 
 int collision_check(Paddle * pj1, Paddle * pj2, Ball * ball)
@@ -166,7 +166,3 @@ void input_process(Game * game, SceCtrlData * pad)
 		
 	}
 }
-
-
-
-

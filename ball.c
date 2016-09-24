@@ -7,6 +7,15 @@ void ball_move(Ball * ball)
 {
 	ball->x += ball->speed_x;
 	ball->y += ball->speed_y;
+
+	if(ball->x + BALL_RADIUS/2 >= SCREEN_W)
+	{
+		ball->speed_x *= -1; 
+	}
+	else if(ball->x - BALL_RADIUS/2 <= 0)
+	{
+		ball->speed_x *= -1;
+	}
 }
 
 /*	Checks if the ball collisions to the wall and if the ball is near the paddle	*/
@@ -14,15 +23,6 @@ void ball_move(Ball * ball)
 Position ball_collision(Ball * ball)
 {
 	Position pos = MIDDLE;
-	
-	if(ball->x + BALL_RADIUS >= SCREEN_W)
-	{
-		ball->speed_x *= -1; 
-	}
-	else if(ball->x - BALL_RADIUS <= 0)
-	{
-		ball->speed_x *= 1;
-	}
 	
 	if(ball->y <= PADDLE_H + BALL_RADIUS)
 	{
@@ -39,4 +39,5 @@ Position ball_collision(Ball * ball)
 void draw_ball(Ball * ball)
 {
 	vita2d_draw_fill_circle(ball->x, ball->y, BALL_RADIUS, WHITE);
+}
 }

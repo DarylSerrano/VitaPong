@@ -11,20 +11,20 @@
 #define PADDLE_SPEED	7
 
 /*	Default position of the top paddle	*/
-#define	PLAYER_TOP_POS_X	(MIDDLE_SCREEN)
+#define	PLAYER_TOP_POS_X	(MIDDLE_SCREEN-75)
 #define PLAYER_TOP_POS_Y	0
 
 /*	Default position of the bottom paddle	*/
-#define PLAYER_BOTTOM_POS_X		(MIDDLE_SCREEN)
+#define PLAYER_BOTTOM_POS_X		(MIDDLE_SCREEN-75)
 #define	PLAYER_BOTTOM_POS_Y		(SCREEN_H-PADDLE_H)
 
 /*	Dimension and speed of a ball	*/
 #define	BALL_RADIUS		20
-#define	BALL_SPEED		5
+#define	BALL_SPEED		6
 
 /*	Scores position	*/
-#define	SCORE_POSITION_PJ1	(SCREEN_W-10)
-#define	SCORE_POSITION_PJ2	0
+#define	SCORE_POSITION_PJ1	(SCREEN_W-30)
+#define	SCORE_POSITION_PJ2	30
 
 /*	Color utils	*/
 #define	TRANS   RGBA8(  0,   0,   0, 0)
